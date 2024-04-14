@@ -28,11 +28,11 @@ func solveSudoku(board [][]byte) bool {
 }
 
 func findEmptyLocation(board [][]byte, row, col *int) bool {
-	for i := 0; i < n; i++ {
+	for i := 0; i < n; i++ { 
 		for j := 0; j < n; j++ {
 			if board[i][j] == blank {
-				*row, *col = i, j
-				return true
+				*row, *col = i, j // i and j < 9
+				return true 
 			}
 		}
 	}
@@ -42,7 +42,7 @@ func findEmptyLocation(board [][]byte, row, col *int) bool {
 func isValid(board [][]byte, row, col int, num byte) bool {
 	for i := 0; i < n; i++ {
 		if board[row][i] == num || board[i][col] == num || board[row-row%3+i/3][col-col%3+i%3] == num {
-			return false
+			return false // check the num in a box 3x3
 		}
 	}
 	return true
@@ -58,9 +58,9 @@ func main() {
 	args := os.Args[1:]
 	if len(args) != 9 {
 		fmt.Println("Error")
-		return
+		return // check if the length is !=9
 	}
-	board := make([][]byte, n)
+	board := make([][]byte, n) // create a board 9x9
 	for i, arg := range args {
 		if len(arg) != n {
 			fmt.Println("Error")
